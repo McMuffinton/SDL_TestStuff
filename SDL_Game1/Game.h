@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "Sprite.h"
 #include "Keyboard.h"
+#include "animatedSprite.h"
 
 class Game{
 	const int SCREEN_WIDTH = 640;

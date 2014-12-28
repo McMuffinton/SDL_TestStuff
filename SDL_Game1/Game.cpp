@@ -31,7 +31,8 @@ bool Game::init(){
 }
 
 int x = 0, y = 0;
-Sprite lole("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 0, 16, 16);
+int loleTimes[4] = { 5, 10, 5, 10 };
+animatedSprite lole("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 33, 16, 17, 4, loleTimes);
 
 void Game::run(){
 	while (running){
@@ -73,6 +74,8 @@ void Game::update(){
 	if (keyboard.isDown(SDLK_DOWN)){
 		y += 2;
 	}
+
+	lole.update();
 }
 
 void Game::handleInput(SDL_Event *event){
