@@ -24,7 +24,7 @@ Sprite::Sprite(string imagePath, uint8_t R, uint8_t G, uint8_t B, int src_x, int
 }
 
 Sprite::~Sprite(){
-	SDL_FreeSurface(spriteSheet);
+	SDL_FreeSurface(this->spriteSheet);
 }
 
 void Sprite::draw(SDL_Surface* windowSurface, int x, int y){

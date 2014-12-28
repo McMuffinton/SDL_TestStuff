@@ -63,12 +63,14 @@ void Game::update(int timeSinceLastUpdate){
 		running = false;
 	}
 
-	if (keyboard.isDown(SDLK_RIGHT)){
-		player.moveRight();
+	printf("%d %d\n", keyboard.isDown(SDLK_LEFT), keyboard.isDown(SDLK_RIGHT));
+
+	if (keyboard.isDown(SDLK_LEFT) && keyboard.isDown(SDLK_RIGHT)){
+		player.stop();
 	} else if (keyboard.isDown(SDLK_LEFT)){
 		player.moveLeft();
-	} else if (keyboard.isDown(SDLK_LEFT) && keyboard.isDown(SDLK_RIGHT)){
-		player.stop();
+	} else if (keyboard.isDown(SDLK_RIGHT)){
+		player.moveRight();
 	} else {
 		player.stop();
 	}
