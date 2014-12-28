@@ -3,18 +3,39 @@
 
 #include <stdio.h>
 #include <cmath>
+#include <map>
 #include "animatedSprite.h"
 #include "Sprite.h"
 
 class Player{
 
+	//Constants
+	const float STOPPED = 0.1f;
 	const float ACCEL = 0.001f;
 	const float MAXVEL = 0.3f;
 	const float INERTIA = 0.85f;
 
-	animatedSprite* sprite;
+	enum DisplayState
+	{
+		WALKING_LEFT,
+		WALKING_RIGHT,
+		WALKING_UP,
+		WALKING_DOWN,
+		IDLE_LEFT,
+		IDLE_RIGHT
+	};
+
+	std::map<DisplayState, animatedSprite*> sprites;
 
 	int x, y;
+
+	DisplayState state;
+	DisplayState lastDirection;
+	DisplayState direction_x;
+	DisplayState direction_y;
+	bool walking_x;
+	bool walking_y;
+
 	float vel_x, vel_y;
 	float accel_x, accel_y;
 
@@ -31,8 +52,12 @@ class Player{
 		void stop_x();
 		void stop_y();
 
+		DisplayState getSprite();
+		void changeSprite(DisplayState state);
+
 		void draw(SDL_Surface* windowSurface);
 		void update(int timeSinceLastUpdate);
+		void updateStateVariables();
 };
 
 #endif
