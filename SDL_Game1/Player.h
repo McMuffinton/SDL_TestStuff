@@ -24,7 +24,12 @@ class Player{
 
 		void moveLeft();
 		void moveRight();
-		void stop();
+
+		void moveUp();
+		void moveDown();
+
+		void stop_x();
+		void stop_y();
 
 		void draw(SDL_Surface* windowSurface);
 		void update(int timeSinceLastUpdate);
