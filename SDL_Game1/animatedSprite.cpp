@@ -21,7 +21,7 @@ animatedSprite::animatedSprite(
 }
 
 animatedSprite::~animatedSprite(){
-	SDL_FreeSurface(this->spriteSheet);
+
 }
 
 void animatedSprite::update(){

@@ -30,25 +30,29 @@ bool Game::init(){
 	return success;
 }
 
-int x = 0, y = 0;
-int loleTimes[4] = { 5, 10, 5, 10 };
-animatedSprite lole("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 33, 16, 17, 4, loleTimes);
-
+Player player(0, 200);
 void Game::run(){
+	int timeSinceLastFrame;
+	int lastFrameStartTime = SDL_GetTicks();
+	int frameStartTime;
+	int timeSpent;
+
 	while (running){
-		int startTime = SDL_GetTicks();
-		
-		update();
+		frameStartTime = SDL_GetTicks();
+		timeSinceLastFrame = frameStartTime - lastFrameStartTime;
+		lastFrameStartTime = SDL_GetTicks();
+
+		update(timeSinceLastFrame);
 
 		draw();
 
-		int timeSpent = startTime - SDL_GetTicks();
+		timeSpent = frameStartTime - SDL_GetTicks();
 
 		SDL_Delay((1000 / 60) - timeSpent);
 	}
 }
 
-void Game::update(){
+void Game::update(int timeSinceLastUpdate){
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) != 0){
@@ -59,23 +63,17 @@ void Game::update(){
 		running = false;
 	}
 
-	if (keyboard.isDown(SDLK_LEFT)){
-		x -= 2;
+	if (keyboard.isDown(SDLK_RIGHT)){
+		player.moveRight();
+	} else if (keyboard.isDown(SDLK_LEFT)){
+		player.moveLeft();
+	} else if (keyboard.isDown(SDLK_LEFT) && keyboard.isDown(SDLK_RIGHT)){
+		player.stop();
+	} else {
+		player.stop();
 	}
 
-	if (this->keyboard.isDown(SDLK_RIGHT)){
-		x += 2;
-	}
-
-	if (keyboard.isDown(SDLK_UP)){
-		y -= 2;
-	}
-
-	if (keyboard.isDown(SDLK_DOWN)){
-		y += 2;
-	}
-
-	lole.update();
+	player.update(timeSinceLastUpdate);
 }
 
 void Game::handleInput(SDL_Event *event){
@@ -98,7 +96,7 @@ void Game::draw(){
 	//Draw background
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 	//Draw stuff
-	lole.draw(screenSurface, x, y);
+	player.draw(screenSurface);
 	//Update window surface
 	SDL_UpdateWindowSurface(window);
 }

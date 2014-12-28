@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "Keyboard.h"
 #include "animatedSprite.h"
+#include "Player.h"
 
 class Game{
 	const int SCREEN_WIDTH = 640;
@@ -21,7 +22,7 @@ public:
 	bool init();
 	void run();
 	void handleInput(SDL_Event *event);
-	void update();
+	void update(int timeSinceLastUpdate);
 	void draw();
 	void cleanup();
 };

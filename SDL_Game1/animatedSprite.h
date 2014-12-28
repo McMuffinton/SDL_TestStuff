@@ -1,3 +1,6 @@
+#ifndef ANIMATEDSPRITE_H_
+#define ANIMATEDSPRITE_H_
+
 #include <stdio.h>
 #include <vector>
 #include "sprite.h"
@@ -28,3 +31,4 @@ public:
 
 	~animatedSprite();
 };
+#endif
