@@ -10,6 +10,15 @@ class Sprite{
 
 	public:
 		Sprite(string imagePath,
+			uint8_t R,
+			uint8_t G,
+			uint8_t B,
+			int src_x,
+			int src_y,
+			int src_width,
+			int src_height);
+
+		Sprite(string imagePath,
 			int src_x,
 			int src_y,
 			int src_width,
@@ -17,6 +26,5 @@ class Sprite{
 
 		~Sprite();
 
-		void init(string imagePath, int src_x, int src_y, int src_width, int src_height);
 		void draw(SDL_Surface* windowSurface, int x, int y);
 };

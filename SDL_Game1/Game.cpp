@@ -31,7 +31,7 @@ bool Game::init(){
 }
 
 int x = 0, y = 0;
-Sprite lole("res/img/stuff.bmp", 0, 0, 32, 32);
+Sprite lole("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 0, 16, 16);
 
 void Game::run(){
 	while (running){
@@ -59,19 +59,19 @@ void Game::update(){
 	}
 
 	if (keyboard.isDown(SDLK_LEFT)){
-		x -= 5;
+		x -= 2;
 	}
 
-	if (keyboard.isDown(SDLK_RIGHT)){
-		x += 5;
+	if (this->keyboard.isDown(SDLK_RIGHT)){
+		x += 2;
 	}
 
 	if (keyboard.isDown(SDLK_UP)){
-		y -= 5;
+		y -= 2;
 	}
 
 	if (keyboard.isDown(SDLK_DOWN)){
-		y += 5;
+		y += 2;
 	}
 }
 
@@ -93,7 +93,7 @@ void Game::handleInput(SDL_Event *event){
 
 void Game::draw(){
 	//Draw background
-	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 0, 0));
+	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 	//Draw stuff
 	lole.draw(screenSurface, x, y);
 	//Update window surface
