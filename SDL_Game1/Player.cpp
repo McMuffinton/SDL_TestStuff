@@ -20,29 +20,29 @@ Player::~Player(){
 }
 
 void Player::moveLeft(){
-	accel_x = -ACCEL;
+	this->accel_x = -ACCEL;
 	this->lastDirection = WALKING_LEFT;
 }
 
 void Player::moveRight(){
-	accel_x = ACCEL;
+	this->accel_x = ACCEL;
 	this->lastDirection = WALKING_RIGHT;
 }
 
 void Player::moveUp(){
-	accel_y = -ACCEL;
+	this->accel_y = -ACCEL;
 }
 
 void Player::moveDown(){
-	accel_y = ACCEL;
+	this->accel_y = ACCEL;
 }
 
 void Player::stop_x(){
-	accel_x = 0.0f;
+	this->accel_x = 0.0f;
 }
 
 void Player::stop_y(){
-	accel_y = 0.0f;
+	this->accel_y = 0.0f;
 }
 
 void Player::draw(SDL_Surface* windowSurface){
@@ -79,30 +79,40 @@ void Player::changeSprite(DisplayState state){
 
 void Player::updateStateVariables(){
 	//Update our walking and direction variables
-	if ((vel_y > STOPPED || vel_y < -STOPPED)){
+	if ((this->vel_y > STOPPED || this->vel_y < -STOPPED)){
 		this->walking_y = true;
 		if (this->vel_y > STOPPED){
 			this->direction_y = WALKING_DOWN;
-		}
-		else {
+		} else {
 			this->direction_y = WALKING_UP;
 		}
-	}
-	else {
+	} else {
 		this->walking_y = false;
 	}
 
-	if ((vel_x > STOPPED || vel_x < -STOPPED)){
+	if ((this->vel_x > STOPPED || this->vel_x < -STOPPED)){
 		this->walking_x = true;
 		if (this->vel_x > STOPPED){
 			this->direction_x = WALKING_RIGHT;
-		}
-		else {
+		} else {
 			this->direction_x = WALKING_LEFT;
 		}
-	}
-	else {
+	} else {
 		this->walking_x = false;
+	}
+}
+
+void Player::limitSpeed(float &velocity, float &acceleration){
+	if (acceleration > 0.0f){
+		if (velocity > MAXVEL){
+			velocity = MAXVEL;
+		}
+	} else if (acceleration < 0.0f){
+		if (velocity < -MAXVEL){
+			velocity = -MAXVEL;
+		}
+	} else {
+		velocity = velocity * INERTIA;
 	}
 }
 
@@ -116,35 +126,15 @@ void Player::update(int timeSinceLastUpdate){
 	this->sprites[state]->update();
 
 	//Update x and y accel / velocity
-	this->x += round(timeSinceLastUpdate * vel_x);
-	vel_x += accel_x * timeSinceLastUpdate;
+	this->x += round(timeSinceLastUpdate * this->vel_x);
+	this->vel_x += this->accel_x * timeSinceLastUpdate;
 
-	this->y += round(timeSinceLastUpdate * vel_y);
-	vel_y += accel_y * timeSinceLastUpdate;
+	this->y += round(timeSinceLastUpdate * this->vel_y);
+	this->vel_y += this->accel_y * timeSinceLastUpdate;
 
 	//Make sure vel_x don't exceed the max velocity
-	if (this->accel_x > 0.0f){
-		if (this->vel_x > MAXVEL){
-			this->vel_x = MAXVEL;
-		}
-	} else if (this->accel_x < 0.0f){
-		if (this->vel_x < -MAXVEL){
-			this->vel_x = -MAXVEL;
-		}
-	} else {
-		this->vel_x = this->vel_x * INERTIA;
-	}
+	limitSpeed(this->vel_x, this->accel_x);
 
 	//Make sure vel_y don't exceed the max velocity
-	if (this->accel_y > 0.0f){
-		if (this->vel_y > MAXVEL){
-			this->vel_y = MAXVEL;
-		}
-	} else if (this->accel_y < 0.0f){
-		if (this->vel_y < -MAXVEL){
-			this->vel_y = -MAXVEL;
-		}
-	} else {
-		this->vel_y = this->vel_y * INERTIA;
-	}
+	limitSpeed(this->vel_y, this->accel_y);
 }

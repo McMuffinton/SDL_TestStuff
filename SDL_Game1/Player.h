@@ -12,7 +12,7 @@ class Player{
 	//Constants
 	const float STOPPED = 0.1f;
 	const float ACCEL = 0.001f;
-	const float MAXVEL = 0.3f;
+	const float MAXVEL = 0.4f;
 	const float INERTIA = 0.85f;
 
 	enum DisplayState
@@ -43,12 +43,11 @@ class Player{
 		Player(int x, int y);
 		~Player();
 
+		//Movement functions
 		void moveLeft();
 		void moveRight();
-
 		void moveUp();
 		void moveDown();
-
 		void stop_x();
 		void stop_y();
 
@@ -58,6 +57,8 @@ class Player{
 		void draw(SDL_Surface* windowSurface);
 		void update(int timeSinceLastUpdate);
 		void updateStateVariables();
+
+		void limitSpeed(float &velocity, float &acceleration);
 };
 
 #endif
