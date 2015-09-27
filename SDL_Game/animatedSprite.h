@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "sprite.h"
+#include "Sprite.h"
 
 class animatedSprite : public Sprite{
 	int totalSprites;
