@@ -1,5 +1,8 @@
-# Build results
+# Ignore Build results
 /SDL_Game/bin/*
+
+# Except for .gitignore files!
+!.gitignore
 
 # Possible lingering object files
 *.o
