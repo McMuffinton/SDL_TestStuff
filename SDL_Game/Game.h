@@ -5,24 +5,24 @@
 #include "animatedSprite.h"
 #include "Player.h"
 
-class Game{
-	const int SCREEN_WIDTH = 640;
-	const int SCREEN_HEIGHT = 480;
+class Game {
+    const int SCREEN_WIDTH = 640;
+    const int SCREEN_HEIGHT = 480;
 
-	SDL_Window* window = NULL;
-	SDL_Surface* screenSurface = NULL;
-	Keyboard keyboard;
+    SDL_Window* window = NULL;
+    SDL_Surface* screenSurface = NULL;
+    Keyboard keyboard;
 
-	bool running = true;
+    bool running = true;
 
-public:
-	Game();
-	~Game();
+  public:
+    Game();
+    ~Game();
 
-	bool init();
-	void run();
-	void handleInput(SDL_Event *event);
-	void update(int timeSinceLastUpdate);
-	void draw();
-	void cleanup();
+    bool init();
+    void run();
+    void handleInput(SDL_Event* event);
+    void update(int timeSinceLastUpdate);
+    void draw();
+    void cleanup();
 };

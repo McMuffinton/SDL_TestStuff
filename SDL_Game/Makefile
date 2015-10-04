@@ -1,5 +1,5 @@
 # Files to compile
-SRC = animatedSprite.cpp main.cpp Keyboard.cpp Player.cpp Sprite.cpp Game.cpp
+SRC = *.cpp
 
 # Compiler
 CC = g++
@@ -8,9 +8,14 @@ CC = g++
 # -w =  supress warnings
 COMPILER_FLAGS = -w
 
-#LINKER_FLAGS
+# LINKER_FLAGS
 # -lsSDL2 for SDL2
 LINKER_FLAGS = -lSDL2
+
+# Formatting stuff
+FMT = clang-format-3.5
+FORMATTER_FLAGS = -style=file -i
+TO_FORMAT = *.cpp *.h
 
 # Name of the resulting file
 EXEC = bin/vidya
@@ -22,6 +27,12 @@ all : $(SRC)
 	@echo "\nMoving resources to bin"
 	cp -r res bin
 	cp SDL2.dll bin
+
+run : all
+	$(EXEC)
+
+format : $(SRC)
+	$(FMT) $(FORMATTER_FLAGS) $(TO_FORMAT)
 
 # Kind cleaning lady
 .PHONY: clean
