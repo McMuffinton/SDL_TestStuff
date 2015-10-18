@@ -1,5 +1,5 @@
 # Ignore Build results
-/SDL_Game/bin/*
+build
 
 # Except for .gitignore files!
 !.gitignore
