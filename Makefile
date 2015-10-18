@@ -15,7 +15,7 @@ LINKER_FLAGS = -lSDL2
 # Formatting stuff
 FMT = clang-format-3.5
 FORMATTER_FLAGS = -style=file -i
-TO_FORMAT = *.cpp *.h
+TO_FORMAT = $(SRC_PATCH)*.cpp $(SRC_PATCH)*.h
 
 # Name of the resulting file
 EXEC = build/vidya
