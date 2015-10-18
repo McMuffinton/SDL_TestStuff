@@ -1,6 +1,6 @@
 # Files to compile
 SRC = *.cpp
-
+SRC_PATH = src/
 # Compiler
 CC = g++
 
@@ -18,15 +18,16 @@ FORMATTER_FLAGS = -style=file -i
 TO_FORMAT = *.cpp *.h
 
 # Name of the resulting file
-EXEC = bin/vidya
+EXEC = build/vidya
 
 # Compile stuff
-all : $(SRC)
+all : $(SRC_PATH SRC)
+	mkdir -p build
 	@echo "Compiling vidya"
-	$(CC) $(SRC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(EXEC)
+	$(CC) $(SRC_PATH)$(SRC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(EXEC)
 	@echo "\nMoving resources to bin"
-	cp -r res bin
-	cp SDL2.dll bin
+	cp -r res build
+	cp SDL2.dll build
 
 run : all
 	$(EXEC)
@@ -38,5 +39,5 @@ format : $(SRC)
 .PHONY: clean
 clean:
 	@echo "Hi, I'm here to clean up your project!"
-	rm -rf *.o
-	rm -rf bin/*
+	rm -rf $(SRC_PATH)*.o
+	rm -rf build/*
