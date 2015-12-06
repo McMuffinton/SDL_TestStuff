@@ -6,7 +6,7 @@ CC = g++
 
 # Compiler flags
 # -w =  supress warnings
-COMPILER_FLAGS = -w
+COMPILER_FLAGS = -w -std=c++11
 
 # LINKER_FLAGS
 # -lsSDL2 for SDL2

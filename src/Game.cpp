@@ -64,27 +64,7 @@ void Game::update(int timeSinceLastUpdate) {
         running = false;
     }
 
-    if(keyboard.isDown(SDLK_LEFT) && keyboard.isDown(SDLK_RIGHT)) {
-        player.stop_x();
-    } else if(keyboard.isDown(SDLK_LEFT)) {
-        player.moveLeft();
-    } else if(keyboard.isDown(SDLK_RIGHT)) {
-        player.moveRight();
-    } else {
-        player.stop_x();
-    }
-
-    if(keyboard.isDown(SDLK_UP) && keyboard.isDown(SDLK_DOWN)) {
-        player.stop_y();
-    } else if(keyboard.isDown(SDLK_UP)) {
-        player.moveUp();
-    } else if(keyboard.isDown(SDLK_DOWN)) {
-        player.moveDown();
-    } else {
-        player.stop_y();
-    }
-
-    player.update(timeSinceLastUpdate);
+    player.update(timeSinceLastUpdate, keyboard);
 }
 
 void Game::handleInput(SDL_Event *event) {

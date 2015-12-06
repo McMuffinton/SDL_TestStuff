@@ -7,6 +7,7 @@
 #include "animatedSprite.h"
 #include "Sprite.h"
 
+class Keyboard;
 class Player {
     // Constants
     const float STOPPED = 0.1f;
@@ -17,6 +18,7 @@ class Player {
     enum DisplayState { WALKING_LEFT, WALKING_RIGHT, WALKING_UP, WALKING_DOWN, IDLE_LEFT, IDLE_RIGHT };
 
     std::map<DisplayState, animatedSprite *> sprites;
+    void addSprite(DisplayState state, animatedSprite* sprite);
 
     int x, y;
 
@@ -46,7 +48,8 @@ class Player {
     void changeSprite(DisplayState state);
 
     void draw(SDL_Surface *windowSurface);
-    void update(int timeSinceLastUpdate);
+    void processInput(Keyboard input);
+    void update(int timeSinceLastUpdate, Keyboard input);
     void updateStateVariables();
 
     void limitSpeed(float &velocity, float &acceleration);
