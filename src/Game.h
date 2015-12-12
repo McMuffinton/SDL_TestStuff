@@ -4,6 +4,7 @@
 #include "Keyboard.h"
 #include "animatedSprite.h"
 #include "Player.h"
+#include "GameObject.h"
 
 class Game {
     const int SCREEN_WIDTH = 640;
@@ -18,6 +19,9 @@ class Game {
   public:
     Game();
     ~Game();
+
+    vector<GameObject*> objects;
+    void addObject(GameObject* toAdd);
 
     bool init();
     void run();

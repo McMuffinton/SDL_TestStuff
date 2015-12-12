@@ -6,3 +6,9 @@ build
 
 # Possible lingering object files
 *.o
+
+# Qt creator stuff
+*.creator*
+*.files
+*.includes
+*.config

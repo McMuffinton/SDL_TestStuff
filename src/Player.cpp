@@ -14,6 +14,8 @@ Player::Player(int x, int y) {
 
     this->x = x;
     this->y = y;
+
+    this->lastDirection = DisplayState::WALKING_RIGHT;
     this->state = DisplayState::IDLE_RIGHT;
 }
 
@@ -125,7 +127,7 @@ void Player::limitSpeed(float &velocity, float &acceleration) {
     }
 }
 
-void Player::processInput(Keyboard input) {
+void Player::handleInput(Keyboard input) {
     if(input.isDown(SDLK_LEFT) && input.isDown(SDLK_RIGHT)) {
         this->stop_x();
     } else if(input.isDown(SDLK_LEFT)) {
@@ -147,9 +149,7 @@ void Player::processInput(Keyboard input) {
     }
 }
 
-void Player::update(int timeSinceLastUpdate, Keyboard input) {
-    this->processInput(input);
-
+void Player::update(int timeSinceLastUpdate) {
     updateStateVariables();
 
     // Change our sprite according to our evaluated state

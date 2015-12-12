@@ -12,6 +12,10 @@ Game::~Game() {
     cleanup();
 }
 
+void Game::addObject(GameObject *toAdd) {
+    this->objects.push_back(toAdd);
+}
+
 bool Game::init() {
     bool success = true;
 
@@ -31,12 +35,17 @@ bool Game::init() {
     return success;
 }
 
-Player player(0, 200);
 void Game::run() {
     int timeSinceLastFrame;
     int lastFrameStartTime = SDL_GetTicks();
     int frameStartTime;
     int timeSpent;
+
+    this->addObject(new Player(0, 0));
+    this->addObject(new Player(10, 10));
+    this->addObject(new Player(20, 0));
+    this->addObject(new Player(0, 20));
+    this->addObject(new Player(20, 20));
 
     while(running) {
         frameStartTime = SDL_GetTicks();
@@ -51,20 +60,6 @@ void Game::run() {
 
         SDL_Delay((1000 / 60) - timeSpent);
     }
-}
-
-void Game::update(int timeSinceLastUpdate) {
-    SDL_Event event;
-
-    while(SDL_PollEvent(&event) != 0) {
-        handleInput(&event);
-    }
-
-    if(keyboard.isDown(SDLK_ESCAPE)) {
-        running = false;
-    }
-
-    player.update(timeSinceLastUpdate, keyboard);
 }
 
 void Game::handleInput(SDL_Event *event) {
@@ -83,11 +78,37 @@ void Game::handleInput(SDL_Event *event) {
     }
 }
 
+void Game::update(int timeSinceLastUpdate) {
+    SDL_Event event;
+
+    while(SDL_PollEvent(&event) != 0) {
+        handleInput(&event);
+    }
+
+    if(keyboard.isDown(SDLK_ESCAPE)) {
+        running = false;
+    }
+
+    // Have all GameObjects do their thing with the given input
+    for(GameObject* obj : this->objects){
+        (*obj).handleInput(this->keyboard);
+    }
+
+    // Have all GameObjects update
+    for(GameObject* obj : this->objects){
+        (*obj).update(timeSinceLastUpdate);
+    }
+}
+
 void Game::draw() {
     // Draw background
     SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-    // Draw stuff
-    player.draw(screenSurface);
+
+    // Have all GameObjects draw themselves
+    for(GameObject* obj : this->objects){
+        (*obj).draw(screenSurface);
+    }
+
     // Update window surface
     SDL_UpdateWindowSurface(window);
 }

@@ -6,9 +6,10 @@
 #include <map>
 #include "animatedSprite.h"
 #include "Sprite.h"
+#include "GameObject.h"
 
 class Keyboard;
-class Player {
+class Player : public GameObject{
     // Constants
     const float STOPPED = 0.1f;
     const float ACCEL = 0.001f;
@@ -20,21 +21,21 @@ class Player {
     std::map<DisplayState, animatedSprite *> sprites;
     void addSprite(DisplayState state, animatedSprite* sprite);
 
-    int x, y;
-
     DisplayState state;
     DisplayState lastDirection;
     DisplayState direction_x;
     DisplayState direction_y;
-    bool walking_x;
-    bool walking_y;
+    bool walking_x = false;
+    bool walking_y = false;
 
-    float vel_x, vel_y;
-    float accel_x, accel_y;
+    float vel_x = 0, vel_y = 0;
+    float accel_x = 0, accel_y = 0;
 
   public:
     Player(int x, int y);
     ~Player();
+
+    int x, y;
 
     // Movement functions
     void moveLeft();
@@ -48,8 +49,8 @@ class Player {
     void changeSprite(DisplayState state);
 
     void draw(SDL_Surface *windowSurface);
-    void processInput(Keyboard input);
-    void update(int timeSinceLastUpdate, Keyboard input);
+    void handleInput(Keyboard input);
+    void update(int timeSinceLastUpdate);
     void updateStateVariables();
 
     void limitSpeed(float &velocity, float &acceleration);
