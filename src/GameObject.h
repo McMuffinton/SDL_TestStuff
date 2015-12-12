@@ -4,13 +4,15 @@
 
 class Keyboard;
 class GameObject {
-public:
+  public:
     GameObject(){};
     virtual ~GameObject(){};
 
+    // clang-format off
     virtual void handleInput(Keyboard input)     =0;
     virtual void update(int timeSinceLastUpdate) =0;
     virtual void draw(SDL_Surface *windowSurface)=0;
+    // clang-format on
 };
 
-#endif // GAMEOBJECT_H
+#endif  // GAMEOBJECT_H

@@ -12,7 +12,7 @@ Game::~Game() {
     cleanup();
 }
 
-void Game::addObject(GameObject *toAdd) {
+void Game::addObject(GameObject* toAdd) {
     this->objects.push_back(toAdd);
 }
 
@@ -62,7 +62,7 @@ void Game::run() {
     }
 }
 
-void Game::handleInput(SDL_Event *event) {
+void Game::handleInput(SDL_Event* event) {
     switch(event->type) {
         case SDL_QUIT:
             running = false;
@@ -90,12 +90,12 @@ void Game::update(int timeSinceLastUpdate) {
     }
 
     // Have all GameObjects do their thing with the given input
-    for(GameObject* obj : this->objects){
+    for(GameObject* obj : this->objects) {
         (*obj).handleInput(this->keyboard);
     }
 
     // Have all GameObjects update
-    for(GameObject* obj : this->objects){
+    for(GameObject* obj : this->objects) {
         (*obj).update(timeSinceLastUpdate);
     }
 }
@@ -105,7 +105,7 @@ void Game::draw() {
     SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
     // Have all GameObjects draw themselves
-    for(GameObject* obj : this->objects){
+    for(GameObject* obj : this->objects) {
         (*obj).draw(screenSurface);
     }
 

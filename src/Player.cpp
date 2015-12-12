@@ -5,12 +5,14 @@ Player::Player(int x, int y) {
     // Set up animatedSprites
     int frameDurations[4] = {15, 15, 15, 15};
 
+    // clang-format off
     this->addSprite(DisplayState::IDLE_RIGHT,    new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 0, 16, 16, 4, frameDurations));
     this->addSprite(DisplayState::IDLE_LEFT,     new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 16, 16, 16, 4, frameDurations));
     this->addSprite(DisplayState::WALKING_LEFT,  new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 32, 16, 17, 4, frameDurations));
     this->addSprite(DisplayState::WALKING_RIGHT, new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 49, 16, 17, 4, frameDurations));
     this->addSprite(DisplayState::WALKING_UP,    new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 66, 16, 17, 4, frameDurations));
     this->addSprite(DisplayState::WALKING_DOWN,  new animatedSprite("res/img/AW_Soldier.bmp", 200, 200, 200, 0, 83, 16, 17, 4, frameDurations));
+    // clang-format on
 
     this->x = x;
     this->y = y;

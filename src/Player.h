@@ -9,7 +9,7 @@
 #include "GameObject.h"
 
 class Keyboard;
-class Player : public GameObject{
+class Player : public GameObject {
     // Constants
     const float STOPPED = 0.1f;
     const float ACCEL = 0.001f;
@@ -19,7 +19,7 @@ class Player : public GameObject{
     enum DisplayState { WALKING_LEFT, WALKING_RIGHT, WALKING_UP, WALKING_DOWN, IDLE_LEFT, IDLE_RIGHT };
 
     std::map<DisplayState, animatedSprite *> sprites;
-    void addSprite(DisplayState state, animatedSprite* sprite);
+    void addSprite(DisplayState state, animatedSprite *sprite);
 
     DisplayState state;
     DisplayState lastDirection;

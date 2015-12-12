@@ -13,7 +13,7 @@ COMPILER_FLAGS = -w -std=c++11
 LINKER_FLAGS = -lSDL2
 
 # Formatting stuff
-FMT = clang-format-3.5
+FMT = clang-format-3.6
 FORMATTER_FLAGS = -style=file -i
 TO_FORMAT = $(SRC_PATH)*.cpp $(SRC_PATH)*.h
 
