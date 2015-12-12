@@ -23,12 +23,12 @@ Player::Player(int x, int y) {
 
 Player::~Player() {
     // Clean up animatedSprites
-    for(auto &sprite : this->sprites) {
+    for(auto& sprite : this->sprites) {
         delete sprite.second;
     }
 }
 
-void Player::addSprite(DisplayState state, animatedSprite *sprite) {
+void Player::addSprite(DisplayState state, animatedSprite* sprite) {
     this->sprites[state] = sprite;
 }
 
@@ -58,7 +58,7 @@ void Player::stop_y() {
     this->accel_y = 0.0f;
 }
 
-void Player::draw(SDL_Surface *windowSurface) {
+void Player::draw(SDL_Surface* windowSurface) {
     this->sprites[state]->draw(windowSurface, this->x, this->y);
 }
 
@@ -115,7 +115,7 @@ void Player::updateStateVariables() {
     }
 }
 
-void Player::limitSpeed(float &velocity, float &acceleration) {
+void Player::limitSpeed(float& velocity, float& acceleration) {
     if(acceleration > 0.0f) {
         if(velocity > MAXVEL) {
             velocity = MAXVEL;
