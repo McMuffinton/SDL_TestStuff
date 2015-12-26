@@ -1,5 +1,6 @@
 # Ignore Build results
 build
+unittest
 
 # Except for .gitignore files!
 !.gitignore
@@ -12,3 +13,6 @@ build
 *.files
 *.includes
 *.config
+
+# Google test source
+googletest
