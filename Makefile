@@ -27,7 +27,7 @@ all : $(SRC_PATH SRC)
 	$(CC) $(SRC_PATH)$(SRC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(EXEC)
 	@echo "\nMoving resources to bin"
 	cp -r res build
-	cp SDL2.dll build
+	cp lib/SDL2.dll build
 
 run : all
 	$(EXEC)
